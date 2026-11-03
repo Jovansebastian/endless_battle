@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Detail Deteksi{% endblock %}
+{% block breadcrumb %}Detail Deteksi{% endblock %}
+{% block content %}
+<section class="page-heading">
+    <h1>Detail Objek Terdeteksi #{{ record.id }}</h1>
+    <a href="/history" class="btn btn-outline">Kembali</a>
+</section>
+
+<section class="panel">
+    <img src="{{ record.image_path }}" style="max-width:100%; border-radius:8px; margin-bottom:20px;">
+    
+    <h2>Daftar Koordinat & Confidence Score</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Class Name</th>
+                <th>Confidence Score</th>
+                <th>X Min</th>
+                <th>Y Min</th>
+                <th>X Max</th>
+                <th>Y Max</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in record.results %}
+            <tr>
+                <td><span class="badge">{{ r.object_class.class_name }}</span></td>
+                <td>{{ (r.confidence_score * 100)|round(2) }}%</td>
+                <td>{{ r.x_min }}</td>
+                <td>{{ r.y_min }}</td>
+                <td>{{ r.x_max }}</td>
+                <td>{{ r.y_max }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

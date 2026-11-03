@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Riwayat Deteksi{% endblock %}
+{% block breadcrumb %}Riwayat Deteksi{% endblock %}
+{% block content %}
+<section class="page-heading">
+    <h1>Riwayat Deteksi Gambar</h1>
+    <a href="/upload" class="btn btn-primary">+ Upload Baru</a>
+</section>
+
+<section class="panel">
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Gambar</th>
+                    <th>Nama File</th>
+                    <th>Objek Terdeteksi</th>
+                    <th>Waktu Upload</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in records %}
+                <tr>
+                    <td><img src="{{ r.image_path }}" width="60" style="border-radius:4px;"></td>
+                    <td>{{ r.original_filename }}</td>
+                    <td>{{ r.results|length }} Objek</td>
+                    <td>{{ r.created_at.strftime('%d-%m-%Y %H:%M') }}</td>
+                    <td>
+                        <a href="/detail/{{ r.id }}" class="btn btn-small btn-outline">Detail</a>
+                        <form method="post" action="/delete/{{ r.id }}" style="display:inline;" onsubmit="return confirm('Hapus data gambar #{{ r.id }}?')">
+                            <button class="btn btn-small btn-danger" type="submit">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

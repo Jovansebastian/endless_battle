@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Hasil Deteksi{% endblock %}
+{% block breadcrumb %}Hasil Deteksi{% endblock %}
+{% block content %}
+<section class="page-heading">
+    <h1>Hasil Deteksi Gambar #{{ record.id }}</h1>
+    <a href="/history" class="btn btn-outline">Ke Riwayat</a>
+</section>
+
+<section class="panel">
+    <div class="image-preview-container">
+        <img src="{{ record.image_path }}" alt="Hasil Deteksi" style="max-width: 100%; border-radius: 8px;">
+    </div>
+    
+    <h2>Objek Terdeteksi ({{ record.results|length }})</h2>
+    <ul>
+        {% for r in record.results %}
+        <li>
+            <strong>{{ r.object_class.class_name }}</strong> - Confidence: {{ (r.confidence_score * 100)|round(1) }}%
+            <br><small>Bounding Box: [{{ r.x_min }}, {{ r.y_min }}, {{ r.x_max }}, {{ r.y_max }}]</small>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

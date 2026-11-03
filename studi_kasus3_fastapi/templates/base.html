@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Helmet Object Detection{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <a class="brand" href="/">
+            <span class="brand-mark">HD</span>
+            <span><strong>Helmet Detect</strong><small>SAFETY MONITORING</small></span>
+        </a>
+        <nav class="nav-menu">
+            <a class="nav-link {% if active_page == 'dashboard' %}active{% endif %}" href="/">▦ Dashboard</a>
+            <a class="nav-link {% if active_page == 'upload' %}active{% endif %}" href="/upload">⇪ Upload Gambar</a>
+            <a class="nav-link {% if active_page == 'history' %}active{% endif %}" href="/history">◷ Riwayat Deteksi</a>
+        </nav>
+    </aside>
+    <div class="main-area">
+        <header class="topbar">
+            <div class="breadcrumb">Workspace / <strong>{% block breadcrumb %}Dashboard{% endblock %}</strong></div>
+        </header>
+        <main class="content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</div>
+</body>
+</html>

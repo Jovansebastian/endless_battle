@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Upload Gambar{% endblock %}
+{% block breadcrumb %}Upload Gambar{% endblock %}
+{% block content %}
+<section class="page-heading">
+    <h1>Upload Gambar Pelindung Diri</h1>
+</section>
+
+<section class="panel analyze-panel">
+    <form method="post" action="/upload" enctype="multipart/form-data">
+        <label for="file">Pilih Gambar (JPG/PNG):</label>
+        <input type="file" id="file" name="file" accept="image/*" required>
+        
+        <div class="form-actions">
+            <button class="btn btn-primary" type="submit">✦ Analisis Deteksi Objek</button>
+        </div>
+    </form>
+</section>
+{% endblock %}

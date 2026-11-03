@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Dashboard Insight{% endblock %}
+{% block breadcrumb %}Dashboard{% endblock %}
+{% block content %}
+<section class="page-heading">
+    <h1>Dashboard Deteksi Helm Keselamatan</h1>
+    <a href="/upload" class="btn btn-primary">+ Upload Gambar Baru</a>
+</section>
+
+<section class="stats-grid">
+    <article class="stat-card">
+        <span>Gambar Diproses</span>
+        <div class="stat-number">{{ stats.total_images }}</div>
+    </article>
+    <article class="stat-card green">
+        <span>Menggunakan Helm</span>
+        <div class="stat-number">{{ stats.helmet_count }}</div>
+    </article>
+    <article class="stat-card red">
+        <span>Tanpa Helm</span>
+        <div class="stat-number">{{ stats.no_helmet_count }}</div>
+    </article>
+</section>
+
+<section class="panel">
+    <h2>Riwayat Proses Terbaru</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama File</th>
+                    <th>Jumlah Objek</th>
+                    <th>Waktu Deteksi</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for img in recent %}
+                <tr>
+                    <td>#{{ img.id }}</td>
+                    <td>{{ img.original_filename }}</td>
+                    <td>{{ img.results|length }} Objek</td>
+                    <td>{{ img.created_at.strftime('%d-%m-%Y %H:%M') }}</td>
+                    <td><a href="/detail/{{ img.id }}" class="btn btn-small btn-outline">Lihat Detail</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
